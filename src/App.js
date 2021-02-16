@@ -1,9 +1,9 @@
 import './App.css';
 import QuestionCard from './components/QuestionCard';
 import { useState } from 'react';
-import { createPokemonQuestions } from './pokeAPI';
+import { fetchPokemonQuestion } from './pokeAPI';
 
-const TOTAL_QUESTIONS = 10;
+const TOTAL_QUESTIONS = 20;
 
 function App() {
 	const [loading, setLoading] = useState(false);
@@ -12,12 +12,13 @@ function App() {
 	const [score, setScore] = useState(0);
 	const [gameOver, setGameOver] = useState(true);
 	const [userAnswered, setUserAnswered] = useState(false);
-	const [pokemonQuestions, setPokemonQuestions] = useState([]);
+	const [answerArray, setAnswerArray] = useState([]);
+	const [answerPokemonImage, setAnswerPokemonImage] = useState(null);
+	const [answerPokemonName, setAnswerPokemonName] = useState(null);
 
-	const startQuiz = async () => {
+	const startQuiz = () => {
 		setLoading(true);
-		const q = await createPokemonQuestions(TOTAL_QUESTIONS);
-		setPokemonQuestions(q);
+		setPokemonQuestion();
 		setScore(0);
 		setQuestionNumber(0);
 		setUserAnswers([]);
@@ -26,12 +27,19 @@ function App() {
 		setGameOver(false);
 	};
 
+	const setPokemonQuestion = async () => {
+		const question = await fetchPokemonQuestion();
+		const { answerArray, answerPokemonName, answerPokemonImage } = question;
+		setAnswerArray(answerArray);
+		setAnswerPokemonImage(answerPokemonImage);
+		setAnswerPokemonName(answerPokemonName);
+	};
+
 	const checkAnswer = (event) => {
 		const userAnswer = event.currentTarget.value;
 		setUserAnswers([...userAnswers, userAnswer]);
 		setUserAnswered(true);
-		const correct =
-			userAnswer === pokemonQuestions[questionNumber].answerPokemonName;
+		const correct = userAnswer === answerPokemonName;
 		if (correct) {
 			setScore((prev) => prev + 1);
 		}
@@ -42,6 +50,8 @@ function App() {
 		const nextQuestion = questionNumber + 1;
 		if (nextQuestion === TOTAL_QUESTIONS) {
 			setGameOver(true);
+		} else {
+			setPokemonQuestion();
 		}
 		setQuestionNumber(nextQuestion);
 		setUserAnswered(false);
@@ -55,31 +65,35 @@ function App() {
 					{!gameOver && userAnswers.length !== TOTAL_QUESTIONS && (
 						<p className="text-xl w-full">Score: {score}</p>
 					)}
+					{!gameOver && userAnswers.length !== TOTAL_QUESTIONS && (
+						<p className="text-xl p-4">
+							Question: {questionNumber + 1} / {TOTAL_QUESTIONS}
+						</p>
+					)}
 					{userAnswers.length === TOTAL_QUESTIONS && (
 						<p className="text-xl w-full">
-							Game Over! Your final score is {score}/{TOTAL_QUESTIONS}!
+							Game Over! Your final score is {score}/{questionNumber + 1}!
 						</p>
 					)}
 					{(gameOver || userAnswers.length === TOTAL_QUESTIONS) && (
-						<button
-							className="w-44 mt-4 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800"
-							onClick={startQuiz}
-						>
-							{userAnswers.length === TOTAL_QUESTIONS
-								? 'Restart Quiz'
-								: 'Start Quiz'}
-						</button>
+						<>
+							<button
+								className="w-44 mt-4 mr-1 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800"
+								onClick={startQuiz}
+							>
+								Normal Mode
+							</button>
+						</>
 					)}
 					{loading && (
 						<p className="text-xl w-full mt-20">Loading Questions ... </p>
 					)}
 					{!loading && !gameOver && userAnswers.length !== TOTAL_QUESTIONS && (
 						<QuestionCard
-							answers={pokemonQuestions[questionNumber].answerArray}
-							answerImage={pokemonQuestions[questionNumber].answerPokemonImage}
-							actualAnswer={pokemonQuestions[questionNumber].answerPokemonName}
+							answers={answerArray}
+							answerImage={answerPokemonImage}
+							actualAnswer={answerPokemonName}
 							questionNum={questionNumber + 1}
-							totalQuestions={TOTAL_QUESTIONS}
 							callback={checkAnswer}
 							userAnswers={userAnswers}
 							userAnswered={userAnswered}
@@ -98,6 +112,12 @@ function App() {
 						)}
 				</div>
 			</div>
+			<p className="w-full m-auto text-center text-white absolute bottom-8">
+				API -{' '}
+				<a href="https://pokeapi.co/" className="underline">
+					PokéAPI
+				</a>
+			</p>
 			<p className="w-full m-auto text-center text-white absolute bottom-2">
 				Created by Anthony-Virgil Bermejo
 			</p>

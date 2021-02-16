@@ -21,7 +21,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "dev": "craco start"
   },
   "eslintConfig": {
     "extends": [

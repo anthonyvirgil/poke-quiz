@@ -5,16 +5,12 @@ function QuestionCard({
 	answerImage,
 	actualAnswer,
 	questionNum,
-	totalQuestions,
 	callback,
 	userAnswers,
 	userAnswered,
 }) {
 	return (
 		<div className="w-full bg-gray-900 text-white">
-			<p className="text-xl p-4">
-				Question: {questionNum} / {totalQuestions}
-			</p>
 			<img src={answerImage} alt="" className="m-auto w-44"></img>
 			<div className="w-full m-auto">
 				<div className="w-44 md:w-96 m-auto grid grid-cols-1 gap-2 md:grid-cols-2">
