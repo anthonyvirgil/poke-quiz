@@ -51,7 +51,9 @@ function App() {
 		if (nextQuestion === TOTAL_QUESTIONS) {
 			setGameOver(true);
 		} else {
+			setLoading(true);
 			setPokemonQuestion();
+			setLoading(false);
 		}
 		setQuestionNumber(nextQuestion);
 		setUserAnswered(false);
@@ -81,7 +83,9 @@ function App() {
 								className="w-44 mt-4 mr-1 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800"
 								onClick={startQuiz}
 							>
-								Normal Mode
+								{userAnswers.length === TOTAL_QUESTIONS
+									? 'Restart Quiz'
+									: 'Start Quiz'}
 							</button>
 						</>
 					)}
