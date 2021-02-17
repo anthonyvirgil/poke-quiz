@@ -27,8 +27,8 @@ function App() {
 		setGameOver(false);
 	};
 
-	const setPokemonQuestion = async () => {
-		const question = await fetchPokemonQuestion();
+	const setPokemonQuestion = () => {
+		const question = fetchPokemonQuestion();
 		const { answerArray, answerPokemonName, answerPokemonImage } = question;
 		setAnswerArray(answerArray);
 		setAnswerPokemonImage(answerPokemonImage);
@@ -115,13 +115,7 @@ function App() {
 							</button>
 						)}
 				</div>
-				<div className="mt-24">
-					<p className="text-center text-white">
-						API -{' '}
-						<a href="https://pokeapi.co/" className="underline">
-							PokéAPI
-						</a>
-					</p>
+				<div className="mt-32">
 					<p className="text-center text-white">Created by @anthonyvirgil_</p>
 				</div>
 			</div>

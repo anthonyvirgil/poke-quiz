@@ -1,44 +1,44 @@
+import { pokemonNames } from './pokemonNames';
 const TOTAL_POKEMON_COUNT = 898;
 
-export const createPokemonQuestions = async (questionCount) => {
+export const createPokemonQuestions = (questionCount) => {
 	let pokemonIndexes = [];
 	for (let i = 0; i < questionCount; i++) {
-		let q = await fetchPokemonQuestion();
-		pokemonIndexes.push(q);
+		let question = fetchPokemonQuestion();
+		pokemonIndexes.push(question);
 	}
 	return pokemonIndexes;
 };
 
-export const fetchPokemonQuestion = async () => {
+export const fetchPokemonQuestion = () => {
 	const answerPokemonIndex = getRandomPokemonIndex();
-	const getOtherPokemonIndexes = getRandomPokemon(answerPokemonIndex);
-	const answerPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${answerPokemonIndex}`;
-	const otherPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${getOtherPokemonIndexes[0]}`;
-	const otherPokemonUrl2 = `https://pokeapi.co/api/v2/pokemon/${getOtherPokemonIndexes[1]}`;
-	const otherPokemonUrl3 = `https://pokeapi.co/api/v2/pokemon/${getOtherPokemonIndexes[2]}`;
+	const getOtherPokemonIndexes = getRandomPokemonIndexes(answerPokemonIndex); // [2,5,120,720]
 
-	const answerPokemonData = await (await fetch(answerPokemonUrl)).json();
-	const otherPokemonData = await (await fetch(otherPokemonUrl)).json();
-	const otherPokemonData2 = await (await fetch(otherPokemonUrl2)).json();
-	const otherPokemonData3 = await (await fetch(otherPokemonUrl3)).json();
+	const pokemonNameList = pokemonNames;
+	const answerPokemonName = pokemonNameList[answerPokemonIndex - 1];
+	const otherPokemonName = pokemonNameList[getOtherPokemonIndexes[0] - 1];
+	const otherPokemonName2 = pokemonNameList[getOtherPokemonIndexes[1] - 1];
+	const otherPokemonName3 = pokemonNameList[getOtherPokemonIndexes[2] - 1];
 
 	const answerArray = [
-		capitalize(answerPokemonData.name),
-		capitalize(otherPokemonData.name),
-		capitalize(otherPokemonData2.name),
-		capitalize(otherPokemonData3.name),
+		answerPokemonName,
+		otherPokemonName,
+		otherPokemonName2,
+		otherPokemonName3,
 	];
 
+	const answerPokemonImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${answerPokemonIndex}.png`;
+
 	const question = {
-		answerPokemonName: capitalize(answerPokemonData.name),
-		answerPokemonImage: answerPokemonData.sprites.front_default,
+		answerPokemonName: answerPokemonName,
+		answerPokemonImage: answerPokemonImage,
 		answerPokemonIndex: answerPokemonIndex,
 		answerArray: shuffleArray(answerArray),
 	};
 	return question;
 };
 
-const getRandomPokemon = (answerPokemonIndex) => {
+const getRandomPokemonIndexes = (answerPokemonIndex) => {
 	let pokemonIndexes = [];
 
 	for (let i = 0; i < 3; i++) {
@@ -58,6 +58,7 @@ const getRandomPokemon = (answerPokemonIndex) => {
 	return pokemonIndexes;
 };
 
+// Returns 1 to 898 inclusive
 const getRandomPokemonIndex = () => {
 	const min = Math.ceil(1);
 	const max = Math.floor(TOTAL_POKEMON_COUNT);
@@ -66,16 +67,4 @@ const getRandomPokemonIndex = () => {
 
 const shuffleArray = (array) => {
 	return [...array].sort(() => Math.random() - 0.5);
-};
-
-const capitalize = (string) => {
-	let name = string;
-	if (string.indexOf('-') !== -1) {
-		let subNames = string.split('-');
-		for (let i = 0; i < subNames.length; i++) {
-			subNames[i] = subNames[i].charAt(0).toUpperCase() + subNames[i].slice(1);
-		}
-		name = subNames.join('-');
-	}
-	return name.charAt(0).toUpperCase() + name.slice(1);
 };
