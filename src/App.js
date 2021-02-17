@@ -61,8 +61,8 @@ function App() {
 
 	return (
 		<>
-			<div className="App flex-col text-white bg-gray-900 font-custom p-5 min-h-screen overflow-y-auto justify-between">
-				<div className="flex-grow-1">
+			<div className="App flex flex-col text-white bg-gray-900 font-custom p-5 min-h-screen overflow-y-auto justify-between">
+				<div className="">
 					<h1 className="text-3xl m-4">POKé QUIZ</h1>
 					{!gameOver && userAnswers.length !== TOTAL_QUESTIONS && (
 						<p className="text-xl">Score: {score}</p>
@@ -115,7 +115,7 @@ function App() {
 							</button>
 						)}
 				</div>
-				<div className="mt-32">
+				<div className="mt-16 md:mt-0">
 					<p className="text-center text-white">Created by @anthonyvirgil_</p>
 				</div>
 			</div>
