@@ -129,8 +129,16 @@ function App() {
 						</button>
 					)}
 				</div>
-				<div className="mt-16 md:mt-0">
-					<p className="text-center text-white">Created by @anthonyvirgil_</p>
+				<div className="mt-16 md:mt-0 text-center text-white">
+					<p>
+						<a
+							className="underline"
+							href="https://github.com/anthonyvirgil/poke-quiz/"
+						>
+							GitHub Repo Link
+						</a>
+					</p>
+					<p>Created by @anthonyvirgil_</p>
 				</div>
 			</div>
 		</>
