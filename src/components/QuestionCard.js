@@ -22,7 +22,7 @@ function QuestionCard({
 							onClick={(event) => {
 								callback(event);
 							}}
-							className={`m-auto py-3 bg-gray-700 border shadow-xl border-black rounded-xl hover:bg-gray-800 w-32 md:w-44 ${
+							className={`m-auto py-3 bg-gray-700 border shadow-xl border-black rounded-xl focus:outline-none w-32 md:w-44 ${
 								index % 2 === 0 ? 'mr-0' : 'ml-0'
 							} ${
 								userAnswered &&

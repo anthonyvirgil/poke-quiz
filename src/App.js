@@ -32,6 +32,11 @@ function App() {
 		setGameOver(false);
 	};
 
+	const onGameOver = (gameOver) => {
+		setGameOver(gameOver);
+		setUserAnswered(true);
+	};
+
 	const setPokemonQuestion = () => {
 		const question = fetchPokemonQuestion();
 		const {
@@ -105,7 +110,7 @@ function App() {
 							</button>
 						</>
 					)}
-					{!gameOver && <Timer seconds={quizTime} callback={setGameOver} />}
+					{!gameOver && <Timer seconds={quizTime} callback={onGameOver} />}
 					{loading && (
 						<p className="text-xl w-full mt-20">Loading Questions ... </p>
 					)}

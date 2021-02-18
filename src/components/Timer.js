@@ -3,7 +3,7 @@ import { Component } from 'react';
 class Timer extends Component {
 	constructor(props) {
 		super(props);
-		this.setGameOver = props.callback;
+		this.onGameOver = props.callback;
 		this.state = {
 			seconds: parseInt(props.seconds) || 60,
 		};
@@ -18,7 +18,7 @@ class Timer extends Component {
 		if (timeRemaining <= 0) {
 			clearInterval(this.interval);
 
-			this.setGameOver(true);
+			this.onGameOver(true);
 		}
 	}
 
