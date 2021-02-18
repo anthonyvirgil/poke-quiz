@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/poke-quiz/static/css/main.44ce858e.chunk.css",
-    "main.js": "/poke-quiz/static/js/main.9339f0de.chunk.js",
+    "main.css": "/poke-quiz/static/css/main.8c1e5b1f.chunk.css",
+    "main.js": "/poke-quiz/static/js/main.47f17703.chunk.js",
     "runtime-main.js": "/poke-quiz/static/js/runtime-main.0a9cbcbf.js",
     "static/js/2.86052f5b.chunk.js": "/poke-quiz/static/js/2.86052f5b.chunk.js",
     "index.html": "/poke-quiz/index.html",
@@ -10,7 +10,7 @@
   "entrypoints": [
     "static/js/runtime-main.0a9cbcbf.js",
     "static/js/2.86052f5b.chunk.js",
-    "static/css/main.44ce858e.chunk.css",
-    "static/js/main.9339f0de.chunk.js"
+    "static/css/main.8c1e5b1f.chunk.css",
+    "static/js/main.47f17703.chunk.js"
   ]
 }
