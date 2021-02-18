@@ -84,11 +84,11 @@ function App() {
 							<p className="mb-5 text-3xl">Game Over!</p>
 							<div className="flex justify-center">
 								<div className="mr-3">
-									<p className="text-xl">Your Final Score Is</p>
+									<p className="text-xl">Your Final Score</p>
 									<p className="text-4xl">{score}</p>
 								</div>
 								<div className="ml-3">
-									<p className="text-xl">Your High Score is </p>
+									<p className="text-xl">Your High Score</p>
 									<p className="text-4xl">{highScore}</p>
 								</div>
 							</div>
@@ -129,7 +129,7 @@ function App() {
 						</button>
 					)}
 				</div>
-				<div className="mt-16 md:mt-0 text-center text-white">
+				<div className="md:mt-0 text-center text-white">
 					<p>
 						<a
 							className="underline"

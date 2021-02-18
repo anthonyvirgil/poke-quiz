@@ -11,9 +11,9 @@ function QuestionCard({
 }) {
 	return (
 		<div className="w-full bg-gray-900 text-white">
-			<img src={answerImage} alt="" className="m-auto w-44"></img>
+			<img src={answerImage} alt="" className="mx-auto my-3 w-28 md:w-44"></img>
 			<div className="w-full m-auto">
-				<div className="w-44 md:w-96 m-auto grid grid-cols-1 gap-2 md:grid-cols-2">
+				<div className="w-full md:w-96 m-auto grid gap-2 grid-cols-2">
 					{answers.map((answer, index) => (
 						<button
 							key={index}
@@ -22,7 +22,7 @@ function QuestionCard({
 							onClick={(event) => {
 								callback(event);
 							}}
-							className={`m-auto py-3 bg-gray-700 border shadow-xl border-black rounded-xl hover:bg-gray-800 w-44 ${
+							className={`m-auto py-3 bg-gray-700 border shadow-xl border-black rounded-xl hover:bg-gray-800 w-32 md:w-44 ${
 								index % 2 === 0 ? 'mr-0' : 'ml-0'
 							} ${
 								userAnswered &&
