@@ -53,6 +53,7 @@ function App() {
 		const correct = userAnswer === answerPokemonName;
 		if (correct) {
 			setScore((prev) => prev + 1);
+			nextQuestion();
 		} else {
 			if (score > highScore) setHighScore(score);
 			setGameOver(true);
@@ -119,14 +120,6 @@ function App() {
 							userAnswered={userAnswered}
 							pokemonIndex={answerPokemonIndex}
 						/>
-					)}
-					{!gameOver && !loading && userAnswers.length === questionNumber + 1 && (
-						<button
-							className="w-44 mt-2 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800"
-							onClick={nextQuestion}
-						>
-							Next Question
-						</button>
 					)}
 				</div>
 				<div className="md:mt-0 text-center text-white">
