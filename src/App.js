@@ -150,18 +150,14 @@ function App() {
 							>
 								{firstGame ? 'Start Quiz' : 'Restart Quiz'}
 							</button>
-							{toggleHighScoreForm || score >= lastHighScore ? (
-								''
-							) : (
-								<button
-									className="w-44 mt-8 mr-1 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800 focus:outline-none"
-									onClick={() => {
-										setToggleHighScores(!toggleHighScores);
-									}}
-								>
-									{toggleHighScores ? 'Close' : 'High Scores'}
-								</button>
-							)}
+							<button
+								className="w-44 mt-8 mr-1 py-3 px-9 bg-gray-700 border border-black rounded-xl hover:bg-gray-800 focus:outline-none"
+								onClick={() => {
+									setToggleHighScores(!toggleHighScores);
+								}}
+							>
+								{toggleHighScores ? 'Close' : 'High Scores'}
+							</button>
 						</>
 					)}
 					{!gameOver && <Timer seconds={QUIZ_TIME} callback={onGameOver} />}
