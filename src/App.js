@@ -125,15 +125,17 @@ function App() {
 							</div>
 						</div>
 					)}
-					{gameOver && (score >= lastHighScore || toggleHighScoreForm) && (
-						<HighScoreForm
-							highScore={score}
-							toggleHighScoreForm={setToggleHighScoreForm}
-							setScore={setScore}
-							setFirstGame={setFirstGame}
-							numHighScores={MAX_NUM_HIGH_SCORES}
-						/>
-					)}
+					{gameOver &&
+						!firstGame &&
+						(score >= lastHighScore || toggleHighScoreForm) && (
+							<HighScoreForm
+								highScore={score}
+								toggleHighScoreForm={setToggleHighScoreForm}
+								setScore={setScore}
+								setFirstGame={setFirstGame}
+								numHighScores={MAX_NUM_HIGH_SCORES}
+							/>
+						)}
 					{gameOver && toggleHighScores && (
 						<HighScores
 							numHighScores={MAX_NUM_HIGH_SCORES}
